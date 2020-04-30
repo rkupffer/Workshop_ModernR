@@ -34,9 +34,9 @@ class: center, middle
 ---
 ## The `papaja` package
 
-- So far we learned how to use `RMarkdown` to create reproducible reports
+- So far we learned how to use `R Markdown` to create reproducible reports
 
-- `Papaja` allows us to write an entire paper in R, automatically creating results, tables, graphs and references, and everything in APA-format. 
+- `Papaja` allows us to write an entire paper in `R`, automatically create results, tables, graphs and references, and everything in APA-format. 
 
 - `Papaja`  = "Prepare APA Journal Articles"
 
@@ -47,7 +47,9 @@ class: center, middle
 ## Note
 
 .pull-left[
-**The papaja package was developed by [Frederik Aust](http://methexp.uni-koeln.de/?page_id=1603&amp;lang=de). All credit goes to him.**
+The papaja package was developed by [Frederik Aust](http://methexp.uni-koeln.de/?page_id=1603&amp;lang=de). 
+
+.center[**All credit goes to him.**]
 ]
 
 .pull-right[
@@ -90,7 +92,7 @@ devtools::install_github("crsh/papaja")
 ---
 ## The document
 
-The document has the same structure as the `RMarkdown` document we worked with before. It has a YAML header, a body with Markdown headings and texts and some code chunks.
+The document has the same structure as the `R Markdown` document we worked with before. It has a YAML header, a body with Markdown headings and texts and some code chunks.
 
 
 .center[
@@ -101,7 +103,7 @@ The document has the same structure as the `RMarkdown` document we worked with b
 ---
 ## The document
 
-If you press `knit` multiple files are create in th folder you saved your .RMD:
+If you press `knit` multiple files are create in the folder you saved your .Rmd in:
 
 1. a .pdf containing the finished document
 2. a .tex file containing the `LaTeX` code used to make the pdf
@@ -151,7 +153,7 @@ class: center, middle
 ---
 ## Reporting statistical analyses
 
-`printnum()` converts numeric values to character strings for reporting. Exampls:
+`printnum()` converts numeric values to character strings for reporting. 
 
 .pull-left[
 
@@ -216,10 +218,10 @@ Example in text:
 The mean of speed is `r  printnum(mean(cars$speed))` 
 ```
 
-&amp;nbsp; The mean speed is 15.40
+&amp;nbsp; becomes: The mean speed is 15.40
 
 
-So even if my data changes (i.e., exclude some participants, transform the variable etc. ), I don't have to care about the reported numbers. 
+So even if my data changes (i.e., exclude some participants, transform the variable etc. ), you don't have to care about the reported numbers. 
 
 
 &lt;!-- *********** NEW SLIDE ************** --&gt;
@@ -228,7 +230,7 @@ So even if my data changes (i.e., exclude some participants, transform the varia
 
 - `apa_print()` takes objects from various statistical methods to create formatted character strings to report the results in accordance with APA manuscript guidelines
 
-- `apa_print()` currently supports following output objects
+- `apa_print()` currently supports the following output objects
 
 ![](images/example_apa_print.PNG)
 
@@ -236,9 +238,9 @@ So even if my data changes (i.e., exclude some participants, transform the varia
 ---
 ## Reporting statistical analyses
 
-- `apa_print()`  return a list-object with different reportion options like:
-  - estimates 
-  - statistics 
+- `apa_print()`  returns a `list`-object with different reporting option, such as:
+  - estimates (e.g, *mean differences, regression coefficients*)
+  - statistics  (e.g., *t,F,df,p*)
   - full results string (estimate + statistics)
   - results table
 
@@ -246,8 +248,8 @@ Example:
 
 
 ```r
-fit &lt;- lm(mpg ~ hp * cyl, data = mtcars)
-apa_print_fit = apa_print(fit)
+fit &lt;- lm(mpg ~ hp * cyl, data = mtcars) # fit regression
+apa_print_fit = apa_print(fit) # save output of apa_print()
 ```
 
 
@@ -297,7 +299,7 @@ apa_print_fit$full_result$hp
 ---
 ## Tables
 
-- also allows to return a table with `apa_table()`
+- `apa_print()` also allows to return a table with `apa_table()`
 
 
 ```r
@@ -315,7 +317,7 @@ apa_table(apa_print_fit$table,caption = "This is a regression table",note="Cool 
 ---
 ## Tables
 
-- You are also able to use `LaTeX` expressions 
+- You are also able to use `LaTeX` expressions if necessary
 
 
 ```r
@@ -336,9 +338,9 @@ apa_table(apa_print_fit$table,caption = "This is a regression table",
 ---
 ## Tables
 
-You can also make your own custom table with `kable()`
+You can also make your own custom tables with `kable()`
 
-First we need to create a data.frame containing our data.
+First we need to create a `data.frame` containing our data we want to put into the table.
 
 
 ```r
@@ -348,7 +350,7 @@ First we need to create a data.frame containing our data.
                   sd   = sd(mpg),
                   corr = cor.test(mpg,hp)$estimate,
                   p    = cor.test(mpg,hp)$p.value) %&gt;%
-   as.data.frame()) # as.data.frame is only for demonstration purposes
+        as.data.frame()) # as.data.frame is only for demonstration purposes
 ```
 
 ```
@@ -363,7 +365,7 @@ First we need to create a data.frame containing our data.
 ---
 ## Tables
 
-Now we have to bring the values in our data.frame in the format we want them to have.
+Now we have to bring the values in our `data.frame` in the format we want them to have.
 
 
 ```r
@@ -371,8 +373,8 @@ Now we have to bring the values in our data.frame in the format we want them to 
               mutate(mean = printnum(mean),
                      sd   = printnum(sd), 
                      corr = printnum(corr,gt1=FALSE),
-                     p    = printp(p)) 
- %&gt;% as.data.frame())
+                     p    = printp(p))  %&gt;%
+              as.data.frame())
 ```
 
 ```
@@ -395,7 +397,6 @@ Now we can use `kable()` to create a `LaTeX` table
 
 ```r
 library(kableExtra)
-
 kable(temp1 ,format = "latex",booktabs=TRUE)
 ```
 
@@ -418,6 +419,7 @@ gear &amp; mean &amp; sd &amp; corr &amp; p\\
 ]
 &lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
+class: small
 ## Tables
 
 We can align the columns and change the column names
@@ -429,17 +431,16 @@ We can align the columns and change the column names
 library(kableExtra)
 
 temp1 %&gt;%
-  kable(.,format = "latex",booktabs=TRUE,
-*       align = "c",
-*       col.names = c("Gears","$M$","$SD$",
-*                     "$r$","p"),
-*       escape = FALSE)
+  kable(.,format    = "latex",booktabs=TRUE,
+*         align     = "c",
+*         col.names = c("Gears","$M$","$SD$",
+*                       "$r$","p"))
 ```
 
 
 \begin{tabular}{ccccc}
 \toprule
-Gears &amp; `\(M\)` &amp; `\(SD\)` &amp; `\(r\)` &amp; p\\
+Gears &amp; \$M\$ &amp; \$SD\$ &amp; \$r\$ &amp; p\\
 \midrule
 3 &amp; 16.11 &amp; 3.37 &amp; -.74 &amp; .002\\
 4 &amp; 24.53 &amp; 5.28 &amp; -.88 &amp; &lt; .001\\
@@ -457,6 +458,7 @@ Gears &amp; `\(M\)` &amp; `\(SD\)` &amp; `\(r\)` &amp; p\\
 
 &lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
+class: small
 ## Tables
 
 We can add notes and captions
@@ -468,17 +470,17 @@ We can add notes and captions
 library(kableExtra)
 
 temp1 %&gt;%
-  kable(.,format = "latex",booktabs=TRUE,
-        align = "c",
-        col.names = c("Gears","$M$","$SD$",
-                      "$r$","p"),
-*       caption = "This is a caption") %&gt;%
-* footnote(general = "This is a note",
+  kable(.,format    = "latex",booktabs=TRUE,
+          align     = "c",
+          col.names = c("Gears","$M$","$SD$",
+                        "$r$","p"),
+*         caption   = "This is a caption") %&gt;%
+* footnote(general  = "This is a note",
 *          footnote_as_chunk = TRUE,
-*          threeparttable = T,
-*          escape = F,
-*          general_title = "Note.",
-*          title_format = c("italic"))
+*          threeparttable    = T,
+*          escape            = F,
+*          general_title     = "Note.",
+*          title_format      = c("italic"))
 ```
 
 ]
@@ -492,6 +494,7 @@ temp1 %&gt;%
 
 &lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
+class: small
 ## Tables
 
 Add more detail
@@ -503,18 +506,19 @@ Add more detail
 library(kableExtra)
 
 temp1 %&gt;%
-  kable(.,format = "latex",booktabs=TRUE,
-        align = "c",
-        col.names = c("Gears","$M$","$SD$",
-                      "$r$","p"),
-        caption = "This is a caption") %&gt;% 
-  footnote(general = "This is a note", 
-           footnote_as_chunk = TRUE, 
-           threeparttable = T, 
-           escape = F, 
-           general_title = "Note.", 
-           title_format = c("italic")) %&gt;%
-* add_header_above(c(" " = 1, "Estimates" = 3))
+  kable(.,format    = "latex",booktabs=TRUE,
+          align     = "c",
+          col.names = c("Gears","$M$","$SD$",
+                        "$r$","p"),
+          caption   = "This is a caption") %&gt;% 
+  footnote(general  = "This is a note", 
+           footnote_as_chunk = TRUE,
+           threeparttable    = T,
+           escape            = F, 
+           general_title     = "Note.", 
+           title_format      = c("italic")) %&gt;%
+  add_header_above(c(" " = 1,
+*                    "Estimates" = 3))
 ```
 
 ]
@@ -527,6 +531,7 @@ temp1 %&gt;%
 
 &lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
+class: small
 ## Tables
 
 Use additional `LaTeX` options
@@ -548,18 +553,18 @@ Add in YAML
 library(kableExtra)
 
 temp1 %&gt;%
-  kable(.,format = "latex",booktabs=TRUE,
-*       align = "ccccS[table-format=&lt; .3]",
-        col.names = c("Gears","$M$","$SD$",
-                      "$r$","p"),
-        caption = "This is a caption") %&gt;% 
-  footnote(general = "This is a note", 
-           footnote_as_chunk = TRUE, 
-           threeparttable = T, 
-           escape = F, 
-           general_title = "Note.", 
-           title_format = c("italic")) %&gt;%
-  add_header_above(c(" " = 1, "Estimates" = 3)) 
+  kable(.,format    = "latex",booktabs=TRUE,
+*         align     = "ccccS[table-format=&lt; .3]",
+          col.names = c("Gears","$M$","$SD$",
+                        "$r$","p"),
+          caption   = "This is a caption") %&gt;% 
+  footnote(general  = "This is a note", 
+           footnote_as_chunk = TRUE,
+           threeparttable    = T,
+           escape            = F, 
+           general_title     = "Note.", 
+           title_format      = c("italic")) %&gt;%
+  add_header_above(c(" " = 1,"Estimates" = 3))
 ```
 
 ]
@@ -579,8 +584,14 @@ temp1 %&gt;%
 ## Your turn ! 
 
 - load the `StudentsPerformance` data  (`read.csv("Data/StudentsPerformance.csv")`)
+
 - make a publication ready table with `kable()` with the median, maximum, and minimum of `writing.score` and the correlation with `reading.score`
-- calculate a ANOVA comparing `math.score` with `gender` and `parental.level.of.education` as between factors, print your results for the factor `gender` in the text using `apa_print()` as well as all results `apa_table()` 
+
+- calculate a ANOVA comparing `math.score` with `gender` and `parental.level.of.education` as between factors (`aov(math.score ~ gender + parental.level.of.education, data = data)` ))
+
+- print your results for the factor `gender` in the text using `apa_print()`
+
+- print the full ANOVA table using `apa_table()` 
 
 
 
@@ -594,18 +605,39 @@ class: center, middle
 ---
 ## Plots
 
-Plots can be create as in `RMarkdown` before, however, `papaja` also provides a custom ggplot theme (if you like that)
 
+
+.pull-left[
+
+Plots can be create as in `R Markdown` before:
 
 
 ```r
 mtcars %&gt;% 
-  ggplot(.,aes(x = gear, y = hp, group = gear)) +
+  ggplot(.,aes(x = factor(gear), y = hp)) +
     geom_boxplot() +
-    theme_apa()
+    theme_bw()
 ```
 
 ![](Part2_Papaja_files/figure-html/unnamed-chunk-17-1.png)&lt;!-- --&gt;
+
+]
+
+.pull-right[
+
+`papaja` also provides a custom `ggplot` theme 
+
+
+```r
+mtcars %&gt;% 
+  ggplot(.,aes(x = factor(gear), y = hp)) +
+    geom_boxplot() +
+*   theme_apa()
+```
+
+![](Part2_Papaja_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
+
+]
 
 
 &lt;!-- *********** NEW SLIDE ************** --&gt;
@@ -636,12 +668,14 @@ head(ChickWeight)
 
 ```r
 apa_lineplot(
-   data = ChickWeight, id = "Chick",
-   dv   = "weight",factors = c("Time","Diet")
+   data    = ChickWeight,
+   id      = "Chick",
+   dv      = "weight",
+   factors = c("Time","Diet")
 )
 ```
 
-![](Part2_Papaja_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
+![](Part2_Papaja_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
 ]
 
 
@@ -650,7 +684,7 @@ apa_lineplot(
 ---
 ## Plots
 
-You can also use adjust the figure size, dpi and add a figure caption via the chunk options. For instance adding `fig.cap="These are some chickens",dpi=600` to the chunk leads to : 
+You can also adjust the **figure size**, **dpi** and add a **figure captions** via the chunk options. For instance adding `fig.cap="These are some chickens",dpi=600` to the chunk leads to : 
 
 
 .pull-left[
