@@ -1,4 +1,10 @@
 base
+methods
+datasets
+utils
+grDevices
+graphics
+stats
 tidyverse
 ggplot2
 tibble
@@ -9,8 +15,6 @@ dplyr
 stringr
 forcats
 gganimate
-StanHeaders
-rstan
 kableExtra
 DT
 plotly
