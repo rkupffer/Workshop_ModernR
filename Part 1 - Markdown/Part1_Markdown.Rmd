@@ -6,7 +6,7 @@ date: "12.05.2020"
 output:
   xaringan::moon_reader:
     lib_dir: libs
-    css: ["default", "default-fonts","subfiles/my-theme.css","xaringan-themer.css"]
+    css: ["default", "default-fonts","subfiles/my-theme.css","subfiles/my-fonts.css","xaringan-themer.css"]
     nature:
       highlightStyle: github
       ratio: "16:9"
@@ -14,12 +14,13 @@ output:
       countIncrementalSlides: false
 ---
 
+
+
 ```{r setup, include=FALSE, message = FALSE, warning=FALSE}
 options(htmltools.dir.version = FALSE)
 library(tidyverse)
 library(gganimate)
 ```
-
 
 
 
@@ -47,18 +48,18 @@ At the end of this workshop, you should be able to:
 
 
 
+<!-- *********** HEADING ************** -->
+---
+class: heading,middle
+
+
+Part 1: Introduction to R Markdown
+
+
+
 <!-- *********** NEW SLIDE ************** -->
 ---
-class: center, middle
-## Part 1: Introduction to R Markdown
-
-
-
-
-
-<!-- *********** NEW SLIDE ************** -->
----
-## Why use `R Markdown` in the first place?
+## Why use R Markdown in the first place?
 
 - `R Markdown` makes it easy to combine the power of `R` with the simplicity of Markdown documents
 
@@ -105,6 +106,7 @@ Source: rstudio.com
 
 <!-- *********** NEW SLIDE ************** -->
 ---
+class:content
 ## Structure
 
 .pull-left3[
@@ -121,10 +123,11 @@ An `RMarkdown` document consists of
 <img src="images/structure.png", width="100%">
 ]
 
-<!-- *********** NEW SLIDE ************** -->
+<!-- *********** HEADING ************** -->
 ---
-class: center, middle
-## YAML Header
+class: heading, middle
+
+YAML Header
 
 <!-- *********** NEW SLIDE ************** -->
 ---
@@ -294,10 +297,11 @@ output:
 
 ]
 
-<!-- *********** NEW SLIDE ************** -->
+<!-- *********** HEADING ************** -->
 ---
-class: center, middle
-## Text Formatting
+class: heading, middle
+
+Text Formatting
 
 <!-- *********** NEW SLIDE ************** -->
 ---
@@ -437,7 +441,7 @@ or images (see [here](https://stackoverflow.com/questions/25166624/insert-pictur
 
 
 
-.pull-left[
+
 You can also directly use `HTML` code
 
 ```{r eval=FALSE}
@@ -448,9 +452,9 @@ You can also directly use `HTML` code
 
 <b> this is bold </b>
 <font color ="#FF8C00">Orange text</font>
-]
 
-.pull-right[
+***
+
 or Math expressions with `LaTeX`
 
 ```{r eval=FALSE}
@@ -459,15 +463,16 @@ $f(k) = {n \choose k} p^{k} (1-p)^{n-k}$
 
 $f(k) = {n \choose k} p^{k} (1-p)^{n-k}$
 
-(use `$$` for display style)
+use `$$` for display style (same as `"\begin{equation} ... \end{equation}"`)
 
 $$f(k) = {n \choose k} p^{k} (1-p)^{n-k}$$
-]
 
-<!-- *********** NEW SLIDE ************** -->
+
+<!-- *********** HEADING ************** -->
 ---
-class: center, middle
-## R Code 
+class: heading, middle
+
+R Code 
 
 <!-- *********** NEW SLIDE ************** -->
 ---
@@ -514,7 +519,7 @@ Some important chunk options (see also [here](https://yihui.org/knitr/options/#c
 
 <!-- *********** NEW SLIDE ************** -->
 ---
-## Inline `R` Code
+## Inline R Code
 
 You can use inline `R` code like this: 
 
@@ -536,15 +541,16 @@ This is the mean $M_{age} = `r rnorm(100,22,10) %>% mean() %>%  round()`$
 becomes: This is the mean $M_{age} = `r  rnorm(100,22,10) %>% mean() %>%  round()`$
 
 
-<!-- *********** NEW SLIDE ************** -->
+<!-- *********** HEADING ************** -->
 ---
-class: center, middle
-## Taking Advantage of `R`
+class: heading, middle
+
+Taking Advantage of R
 
 
 <!-- *********** NEW SLIDE ************** -->
 ---
-## Make nicer tables  with `kableExtra` and `DT` 
+## Make nicer tables  with kableExtra and DT 
 
 Normal Output: 
 
@@ -554,7 +560,7 @@ head(iris,10)
 
 <!-- *********** NEW SLIDE ************** -->
 ---
-## Make nicer tables  with `kableExtra` and `DT` 
+## Make nicer tables  with kableExtra and DT 
 
 With `kable()`: 
 
@@ -570,7 +576,7 @@ kable(head(iris,10))
 
 <!-- *********** NEW SLIDE ************** -->
 ---
-## Make nicer tables  with `kableExtra` and `DT` 
+## Make nicer tables  with kableExtra and DT 
 
 With  `data.table()` from the [DT package](/https://rstudio.github.io/DT/) : 
 
@@ -587,7 +593,7 @@ DT::datatable(head(iris,10),
 
 <!-- *********** NEW SLIDE ************** -->
 ---
-## Make nicer tables  with `kableExtra` and `DT` 
+## Make nicer tables  with kableExtra and DT 
 
 Also check out the YAML option `df_print: paged`
 
@@ -628,7 +634,7 @@ output:
 
 <!-- *********** NEW SLIDE ************** -->
 ---
-## Nicer output  with [`broom`](https://cran.r-project.org/web/packages/broom/vignettes/broom.html)
+## Nicer output  with [broom](https://cran.r-project.org/web/packages/broom/vignettes/broom.html)
 
 From the documentation: "The [broom](https://cran.r-project.org/web/packages/broom/vignettes/broom.html) package takes the messy output of built-in functions in R, such as lm, nls, or t.test, and turns them into tidy data frames."
 
@@ -642,7 +648,7 @@ Normal `lm()` output:
 
 ]
 .pull-right[
-With [broom](https://cran.r-project.org/web/packages/broom/vignettes/broom.html)
+With `tidy()` from `broom` :
 
 ![lm1](images/example_lm1.PNG)
 
@@ -653,7 +659,7 @@ With [broom](https://cran.r-project.org/web/packages/broom/vignettes/broom.html)
 
 <!-- *********** NEW SLIDE ************** -->
 ---
-## Make nicer plots with [`plotly`](https://plotly-r.com/index.html)   
+## Make nicer plots with [plotly](https://plotly-r.com/index.html)   
 
 .pull-left[
 Normal `ggplot2` output: 
@@ -669,7 +675,7 @@ ggplot(chickwts,aes(x=feed,y=weight)) +
 
 ]
 .pull-right[
-With [plotly](https://plotly-r.com/index.html) 
+With plotly
 
 ```{r  message=FALSE,fig.height=4.5, fig.width= 6, dev='svg'}
 library(plotly)
@@ -684,7 +690,7 @@ ggplotly(p) #<<
 
 <!-- *********** NEW SLIDE ************** -->
 ---
-## Make gifs with  [`gganimate`](https://gganimate.com/) 
+## Make gifs with  [gganimate](https://gganimate.com/) 
 
 
 ```{r gif, cache =TRUE}
@@ -722,7 +728,7 @@ animate(g, height = 400, width = 700,nframes=50,fps=10)
 <!-- *********** NEW SLIDE ************** -->
 ---
 class: small
-## Interactive Plots with `runtime: shiny` 
+## Interactive Plots with runtime: shiny 
 
 You can also use shiny elements in your HTML - Markdown document or presentation
 
