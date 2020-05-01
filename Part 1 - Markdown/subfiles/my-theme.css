@@ -34,10 +34,26 @@
   padding: 2px;
 } 
 
-/* color of headings */
-.h1, h2, h3 {
+/* color of headings + line below*/
+.h1,h2,h3{
   color:#4969a2;
+  border-bottom:1px solid #CCC;
+  float:left;
+  width:100%;
+  padding-bottom:3px;
+  margin-bottom: 10px;
 }
+
+
+
+.inverse h1, .inverse h2, .inverse h3 {
+  color: #f3f3f3;
+  border-bottom: none;
+}
+
+
+
+
 
 /* color of links */
 a, a > code {
@@ -59,4 +75,10 @@ a, a > code {
   display: none;
 }
 
-.remark-code-line-highlighted     { background-color: #FF8F57; }
+/* do not show slide number on title slides */
+.title-slide .remark-slide-number {
+  display: none;
+}
+
+/* color code highlighting  */
+.remark-code-line-highlighted     { background-color: #FEBC9C; }

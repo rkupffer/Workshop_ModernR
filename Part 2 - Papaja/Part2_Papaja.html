@@ -7,6 +7,7 @@
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
     <link rel="stylesheet" href="subfiles\my-theme.css" type="text/css" />
+    <link rel="stylesheet" href="subfiles\my-fonts.css" type="text/css" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
@@ -26,13 +27,14 @@ class: center, middle, inverse, title-slide
 
 
 
-class: center, middle
-## Part 2: Writing scientific articles with the [papaja](https://github.com/crsh/papaja) package
+class: heading,middle
+
+Part 2: Writing scientific articles with the [papaja](https://github.com/crsh/papaja) package
 
 
 &lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
-## The `papaja` package
+## The papaja package
 
 - So far we learned how to use `R Markdown` to create reproducible reports
 
@@ -58,7 +60,7 @@ The papaja package was developed by [Frederik Aust](http://methexp.uni-koeln.de/
 
 &lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
-## The `papaja`  package
+## The papaja  package
 
 From the [github documentation](https://crsh.github.io/papaja_man/introduction.html):
 
@@ -66,7 +68,7 @@ From the [github documentation](https://crsh.github.io/papaja_man/introduction.h
 
 &lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
-## Installing `papaja`
+## Installing papaja
 
 `papaja` is not yet available on CRAN but you can install it from github:
 
@@ -140,18 +142,19 @@ From the [manual](https://crsh.github.io/papaja_man/r-markdown-components.html#b
 
 &lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
-class: center, middle
-## Reporting statistical analyses
+class: heading,middle
+
+Reporting Statistical Analyses
 
 &lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
-## Reporting statistical analyses
+## Reporting Statistical Analyses
 
 - One of the main advantages of `papaja` are the helper functions `printnum(), apa_print(), apa_table()` for reporting the results of your analyses
 
 &lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
-## Reporting statistical analyses
+## Reporting Statistical Analyses
 
 `printnum()` converts numeric values to character strings for reporting. 
 
@@ -209,7 +212,7 @@ printp(0.0001)
 
 &lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
-## Reporting statistical analyses
+## Reporting Statistical Analyses
 
 Example in text: 
 
@@ -226,7 +229,7 @@ So even if my data changes (i.e., exclude some participants, transform the varia
 
 &lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
-## Reporting statistical analyses
+## Reporting Statistical Analyses
 
 - `apa_print()` takes objects from various statistical methods to create formatted character strings to report the results in accordance with APA manuscript guidelines
 
@@ -236,7 +239,7 @@ So even if my data changes (i.e., exclude some participants, transform the varia
 
 &lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
-## Reporting statistical analyses
+## Reporting Statistical Analyses
 
 - `apa_print()`  returns a `list`-object with different reporting option, such as:
   - estimates (e.g, *mean differences, regression coefficients*)
@@ -598,8 +601,9 @@ temp1 %&gt;%
 
 &lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
-class: center, middle
-## Plots
+class: heading,middle
+
+Plots
 
 &lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
@@ -710,8 +714,9 @@ You can also adjust the **figure size**, **dpi** and add a **figure captions** v
 
 &lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
-class: center, middle
-## References
+class: heading,middle
+
+References
 
 &lt;!-- *********** NEW SLIDE ************** --&gt;
 ---

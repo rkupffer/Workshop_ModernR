@@ -14,13 +14,12 @@ output:
       countIncrementalSlides: false
 ---
 
-
-
 ```{r setup, include=FALSE, message = FALSE, warning=FALSE}
 options(htmltools.dir.version = FALSE)
 library(tidyverse)
 library(gganimate)
 ```
+
 
 
 
