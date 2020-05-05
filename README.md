@@ -22,7 +22,7 @@ if(length(new.packages)) install.packages(new.packages,dependencies = TRUE)
 sapply(wanted.packages, require, character.only = TRUE)
 ```
 
-In addition, you need a `TeX` distribution (e.g., MikTeX for Windows, MacTeX for Mac, or TeX Live for Linux) to create .pdf documents. If you did install LaTeX before, or already created some .pdf documents with R Markdown you good to go.   If you have not installed LaTeX before, I recommend installing TinyTeX (https://yihui.name/tinytex/), which is a light and easy-to-maintain LaTeX distribution for R Markdown.
+In addition, you need a `TeX` distribution (e.g., MikTeX for Windows, MacTeX for Mac, or TeX Live for Linux) to create .pdf documents. If you did install LaTeX before or already created some .pdf documents with R Markdown, you are good to go.   If you have not installed LaTeX before, I recommend installing TinyTeX (https://yihui.name/tinytex/), which is a light and easy-to-maintain LaTeX distribution for R Markdown.
 
 TinyTex can be installed from within R as follows.
 
