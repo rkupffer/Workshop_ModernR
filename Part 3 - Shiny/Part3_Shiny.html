@@ -1,25 +1,28 @@
----
-title: "Modern R"
-subtitle: "From RMarkdown to Shiny"
-author: "David Izydorczyk"
-date: "12.05.2020"
-output:
-  xaringan::moon_reader:
-    lib_dir: libs
-    css: ["default", "default-fonts","subfiles/my-theme.css","subfiles/my-fonts.css","xaringan-themer.css"]
-    nature:
-      highlightStyle: github
-      ratio: "16:9"
-      highlightLines: true
-      countIncrementalSlides: false
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Modern R</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="David Izydorczyk" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="subfiles\my-theme.css" type="text/css" />
+    <link rel="stylesheet" href="subfiles\my-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Modern R
+## From RMarkdown to Shiny
+### David Izydorczyk
+### 12.05.2020
+
 ---
 
-```{r setup, include=FALSE, message = FALSE, warning=FALSE}
-options(htmltools.dir.version = FALSE)
-library(tidyverse)
-library(gganimate)
-library(papaja)
-```
+
+
 
 
 
@@ -28,7 +31,7 @@ class: heading,middle
 
 Part 3: Building interactive web apps in R with shiny
 
-<!-- *********** NEW SLIDE ************** -->
+&lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
 ## Shiny
 
@@ -41,7 +44,7 @@ Shiny
 -  is easy to write. No web development skills are required.
 
 
-<!-- *********** NEW SLIDE ************** -->
+&lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
 ## Shiny
 
@@ -58,13 +61,14 @@ Shiny applications can be useful, for example,
   - General: https://shiny.rstudio.com/gallery/
 
 
-<!-- *********** NEW SLIDE ************** -->
+&lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
 ## How to get started
 
 After installing and loading the shiny package
 
-```{r eval=FALSE}
+
+```r
 install.packages("shiny")
 ```
 
@@ -72,11 +76,11 @@ you can create a shiny application with a default layout
 
 
 .center[
-<img src="images/getting_started.PNG", width="90%">
+&lt;img src="images/getting_started.PNG", width="90%"&gt;
 ]
 
 
-<!-- *********** NEW SLIDE ************** -->
+&lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
 ## The structure
 
@@ -95,7 +99,7 @@ A shiny app consits of two parts:
 
 
 
-<!-- *********** NEW SLIDE ************** -->
+&lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
 ##  General idea of how it works
 
@@ -105,7 +109,7 @@ A shiny app consits of two parts:
 
 - This `input`-list can then be accessed in the `server` part. 
 
-- **Reactive** functions, like the `render()` functions then create **output** objects, which have to be saved in a named `list`-object called `output`. For instance, `output$distPlot <- renderPlot({})` creates a plot in `output$distPlot`
+- **Reactive** functions, like the `render()` functions then create **output** objects, which have to be saved in a named `list`-object called `output`. For instance, `output$distPlot &lt;- renderPlot({})` creates a plot in `output$distPlot`
 
 - These outputs can then be used in `Output()` functions of the `ui()` part (e.g., `plotOutput("distPlot")`, note the "" and the missing output$ part!)
 
@@ -119,19 +123,19 @@ A shiny app consits of two parts:
 
 
 
-<!-- *********** NEW SLIDE ************** -->
+&lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
 ## Most common (shiny related) errors
 
-1. <font color ="red"> Error: object 'bins' not found </font> -> forgotten to use `input$bins` instead of `bins`
+1. &lt;font color ="red"&gt; Error: object 'bins' not found &lt;/font&gt; -&gt; forgotten to use `input$bins` instead of `bins`
 
-2.  <font color ="red"> Error: [...] :  Operation not allowed without an active reactive context. </font> -> when using `input$x` you always have to place it in a reactive-function
+2.  &lt;font color ="red"&gt; Error: [...] :  Operation not allowed without an active reactive context. &lt;/font&gt; -&gt; when using `input$x` you always have to place it in a reactive-function
 
-3.  Output is not shown -> make sure your `render()` and `Output()` functions match
+3.  Output is not shown -&gt; make sure your `render()` and `Output()` functions match
 
-4. <font color ="red">Warning: Error in dots_list: object 'output' not found</font> -> Did you put `output$x` in a Output-functiont and forgot the "" ? (i.e., `textOutput(output$x)` instead of `textOutput("x")`).
+4. &lt;font color ="red"&gt;Warning: Error in dots_list: object 'output' not found&lt;/font&gt; -&gt; Did you put `output$x` in a Output-functiont and forgot the "" ? (i.e., `textOutput(output$x)` instead of `textOutput("x")`).
 
-<!-- *********** Exercise ************** -->
+&lt;!-- *********** Exercise ************** --&gt;
 ---
 ## Your turn ! 
 
@@ -140,7 +144,7 @@ A shiny app consits of two parts:
 
 
 
-<!-- *********** HEADING ************** -->
+&lt;!-- *********** HEADING ************** --&gt;
 ---
 class: heading,middle
 Inputs
@@ -148,7 +152,7 @@ Inputs
 
 
 
-<!-- *********** NEW SLIDE ************** -->
+&lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
 class: small
 ## Free text
@@ -157,7 +161,8 @@ class: small
 .pull-left[
 Normal text input:
 
-```{r eval = FALSE}
+
+```r
  textInput(inputId = "ID", 
            label   = "Please type your name here",
            value   = "", width = "100%",
@@ -165,7 +170,7 @@ Normal text input:
 ```
 
 .center[
-<img src="images/example_freetext1.PNG", width="70%">
+&lt;img src="images/example_freetext1.PNG", width="70%"&gt;
 ]
 
 ]
@@ -173,7 +178,8 @@ Normal text input:
 
 Long text input:
 
-```{r eval = FALSE}
+
+```r
 textAreaInput(inputId = "ID", 
               label   = "Tell something about yourself",
               value   = "", 
@@ -181,7 +187,7 @@ textAreaInput(inputId = "ID",
 ```
 
 .center[
-<img src="images/example_freetext2.PNG", width="70%">
+&lt;img src="images/example_freetext2.PNG", width="70%"&gt;
 ]
 
 
@@ -191,14 +197,15 @@ textAreaInput(inputId = "ID",
 
 
 
-<!-- *********** NEW SLIDE ************** -->
+&lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
 ## Numeric inputs
 
 .pull-left[
 Numeric input:
 
-```{r eval = FALSE}
+
+```r
 numericInput(inputId = "num",
              label   = "How old are you ?",
              value   = 50, min = 0,
@@ -206,7 +213,7 @@ numericInput(inputId = "num",
 ```
 
 .center[
-<img src="images/example_num1.PNG", width="70%">
+&lt;img src="images/example_num1.PNG", width="70%"&gt;
 ]
 
 ]
@@ -214,23 +221,23 @@ numericInput(inputId = "num",
 
 Slider input:
 
-```{r eval = FALSE}
+
+```r
 sliderInput(inputId ="slider",
             label   = "How old are you ?",
             min     = 0, max = 100,
             value   = 50,step = 1)
-  
 ```
 
 .center[
-<img src="images/example_num2.PNG", width="70%">
+&lt;img src="images/example_num2.PNG", width="70%"&gt;
 ]
 
 
 ]
 
 
-<!-- *********** NEW SLIDE ************** -->
+&lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
 class: small
 ## Choices
@@ -239,7 +246,8 @@ There are different ways to implement choice options:
 
 .pull-left[
 
-```{r eval=FALSE}
+
+```r
 selectInput(inputId = "select",
             label   = "Are you a cat or a dog person?",
             choices = c("cat","dog")),
@@ -270,7 +278,7 @@ checkboxGroupInput(inputId ="checkbox",
 .pull-right[
 
 
-<img src="images/example_choices.PNG", width="70%">
+&lt;img src="images/example_choices.PNG", width="70%"&gt;
 
 
 ]
@@ -278,14 +286,15 @@ checkboxGroupInput(inputId ="checkbox",
 
 
 
-<!-- *********** NEW SLIDE ************** -->
+&lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
 ## File uploads
 
 Users can also upload files:
 
 
-```{r eval=FALSE}
+
+```r
 fileInput(inputId  = "file_data",
           label    = "Choose some file",
           multiple = FALSE,
@@ -293,25 +302,26 @@ fileInput(inputId  = "file_data",
 ```
 
 .center[
-<img src="images/example_upload.PNG", width="50%">
+&lt;img src="images/example_upload.PNG", width="50%"&gt;
 ]
 
 There are also ways to [implement download-buttons](https://shiny.rstudio.com/reference/shiny/1.0.4/downloadButton.html)
 
-<!-- *********** NEW SLIDE ************** -->
+&lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
 ## Action Buttons
 
 And there can be buttons (with [icons!](https://fontawesome.com/icons))
 
-```{r eval=FALSE}
+
+```r
 actionButton(inputId = "startbutton",
              label   = "Start Simulation",
              icon    = icon("laptop-code"))
 ```
 
 .center[
-<img src="images/example_button.PNG", width="30%">
+&lt;img src="images/example_button.PNG", width="30%"&gt;
 ]
 
 
@@ -320,13 +330,14 @@ Buttons are most often used in combination with `observeEvent()` or `eventReacti
 
 
 
-<!-- *********** NEW SLIDE ************** -->
+&lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
 ## Select varibales from a data.frame
 
 There are also convenient ways to let users select variables from a data.frame:
 
-```{r eval=FALSE}
+
+```r
 varSelectInput(inputId = "selectVars",
                label   = "Select the variables you want to plot",
                data    = ChickWeight)
@@ -335,14 +346,14 @@ varSelectInput(inputId = "selectVars",
 
 
 .center[
-<img src="images/example_selectVars.PNG", width="30%">
+&lt;img src="images/example_selectVars.PNG", width="30%"&gt;
 ]
 
 
 Note that you have to use [tidyeval, non-standard evaluation](https://tidyeval.tidyverse.org/dplyr.html) in tidyverse functions:  `select(!!input$selectVars)`
 
 
-<!-- *********** Exercise ************** -->
+&lt;!-- *********** Exercise ************** --&gt;
 ---
 ## Your turn ! 
 
@@ -362,12 +373,12 @@ Open the `input_exercise_app.R` file. The file contains an almost finished shiny
 
 
 
-<!-- *********** HEADING ************** -->
+&lt;!-- *********** HEADING ************** --&gt;
 ---
 class: heading,middle
 Outputs
 
-<!-- *********** New Slide ************** -->
+&lt;!-- *********** New Slide ************** --&gt;
 ---
 ## Outputs
 
@@ -386,14 +397,14 @@ Outputs
   - renderTable() - tableOutput()
   - renderDataTable() - datatableOutput()
 
-<!-- *********** New Slide ************** -->
+&lt;!-- *********** New Slide ************** --&gt;
 ---
 ## Plots
 
   - renderPlot()  - plotOutput() 
   - renderPlotly() - plotlyOutput()
 
-<!-- *********** New Slide ************** -->
+&lt;!-- *********** New Slide ************** --&gt;
 ---
 class:small
 ## Plots
@@ -401,8 +412,9 @@ class:small
 .pull-left[
 In `server()`:
 
-```{r eval = FALSE }
-output$plot <- renderPlot({
+
+```r
+output$plot &lt;- renderPlot({
                   ggplot(mtcars, aes(x = mpg, y = hp)) +
                     geom_point()+ theme_bw()
 })
@@ -410,7 +422,8 @@ output$plot <- renderPlot({
 
 in `ui()`:
 
-```{r eval = FALSE}
+
+```r
 plotOutput("plot")
 ```
 
@@ -418,7 +431,7 @@ plotOutput("plot")
 Result: 
 
 .center[
-<img src="images/example_outputPlot.PNG", width="70%">
+&lt;img src="images/example_outputPlot.PNG", width="70%"&gt;
 ]
 
 ]
@@ -426,9 +439,10 @@ Result:
 .pull-right[
 In `server()`:
 
-```{r eval = FALSE }
-output$plot <- renderPlotly({
-             p <- ggplot(mtcars, aes(x = mpg, y = hp)) +
+
+```r
+output$plot &lt;- renderPlotly({
+             p &lt;- ggplot(mtcars, aes(x = mpg, y = hp)) +
                    geom_point()+ theme_bw()
              ggplotly(p)
 })
@@ -436,7 +450,8 @@ output$plot <- renderPlotly({
 
 in `ui()`:
 
-```{r eval = FALSE}
+
+```r
 plotlyOutput("plot")
 ```
 
@@ -444,12 +459,12 @@ plotlyOutput("plot")
 Result: 
 
 .center[
-<img src="images/example_outputPlotly.PNG", width="70%">
+&lt;img src="images/example_outputPlotly.PNG", width="70%"&gt;
 ]
 
 ]
 
-<!-- *********** New Slide ************** -->
+&lt;!-- *********** New Slide ************** --&gt;
 ---
 class:small
 ## Tables
@@ -468,7 +483,7 @@ renderDataTable() - datatableOutput():
   
 
 
-<!-- *********** New Slide  ************** -->
+&lt;!-- *********** New Slide  ************** --&gt;
 ---
 class:small
 ## Tables
@@ -476,15 +491,17 @@ class:small
 .pull-left[
 In `server()`:
 
-```{r eval = FALSE }
-output$table <- renderTable({
+
+```r
+output$table &lt;- renderTable({
                   mtcars
 })
 ```
 
 in `ui()`:
 
-```{r eval = FALSE}
+
+```r
 tableOutput("table")
 ```
 
@@ -492,7 +509,7 @@ tableOutput("table")
 Result: 
 
 .center[
-<img src="images/example_outputTable.PNG", width="70%">
+&lt;img src="images/example_outputTable.PNG", width="70%"&gt;
 ]
 
 ]
@@ -500,15 +517,17 @@ Result:
 .pull-right[
 Using [datatable](https://rstudio.github.io/DT/) from the package `DT`. In `server()`:
 
-```{r eval = FALSE }
-output$table <- renderDataTable({
+
+```r
+output$table &lt;- renderDataTable({
             mtcars
 })
 ```
 
 in `ui()`:
 
-```{r eval = FALSE}
+
+```r
 dataTableOutput("table")
 ```
 
@@ -516,19 +535,19 @@ dataTableOutput("table")
 Result: 
 
 .center[
-<img src="images/example_outputDTtable.PNG", width="100%">
+&lt;img src="images/example_outputDTtable.PNG", width="100%"&gt;
 ]
 
 ]
 
-<!-- *********** New Slide ************** -->
+&lt;!-- *********** New Slide ************** --&gt;
 ---
 ## Text
 
 - renderText(): displays text *returned* by the code.
 - renderPrint(): which displays text *printed*  by the code.
 
-<!-- *********** New Slide ************** -->
+&lt;!-- *********** New Slide ************** --&gt;
 ---
 class:small
 ## Text
@@ -536,15 +555,17 @@ class:small
 .pull-left[
 In `server()`:
 
-```{r eval = FALSE }
-output$text<- renderText({
+
+```r
+output$text&lt;- renderText({
   "What sound does a sleeping T-Rex make?  A dino-snore."
 })
 ```
 
 in `ui()`:
 
-```{r eval = FALSE}
+
+```r
 textOutput("text")
 ```
 
@@ -552,7 +573,7 @@ textOutput("text")
 Result: 
 
 .center[
-<img src="images/example_outputText.PNG", width="70%">
+&lt;img src="images/example_outputText.PNG", width="70%"&gt;
 ]
 
 ]
@@ -560,15 +581,17 @@ Result:
 .pull-right[
 **BUT** In `server()`:
 
-```{r eval = FALSE }
-output$text <- renderText({
-             t.test(mpg ~ vs, mtcars) #<< #<<
+
+```r
+output$text &lt;- renderText({
+*            t.test(mpg ~ vs, mtcars) #&lt;&lt;
 })
 ```
 
 in `ui()`:
 
-```{r eval = FALSE}
+
+```r
 textOutput("text")
 ```
 
@@ -576,13 +599,13 @@ textOutput("text")
 Result: 
 
 .center[
-<img src="images/example_outputTextError.PNG", width="100%">
+&lt;img src="images/example_outputTextError.PNG", width="100%"&gt;
 ]
 
 ]
 
 
-<!-- *********** New Slide ************** -->
+&lt;!-- *********** New Slide ************** --&gt;
 ---
 class:small
 ## Text
@@ -590,15 +613,17 @@ class:small
 .pull-left[
 In `server()`:
 
-```{r eval = FALSE }
-output$text<- renderText({
+
+```r
+output$text&lt;- renderText({
   "What sound does a sleeping T-Rex make?  A dino-snore."
 })
 ```
 
 in `ui()`:
 
-```{r eval = FALSE}
+
+```r
 textOutput("text")
 ```
 
@@ -606,7 +631,7 @@ textOutput("text")
 Result: 
 
 .center[
-<img src="images/example_outputText.PNG", width="70%">
+&lt;img src="images/example_outputText.PNG", width="70%"&gt;
 ]
 
 ]
@@ -614,23 +639,25 @@ Result:
 .pull-right[
 **Better**: In `server()`:
 
-```{r eval = FALSE }
-output$text <- renderPrint({ # <<<
-             t.test(mpg ~ vs, mtcars) #<< #<<
+
+```r
+output$text &lt;- renderPrint({ # &lt;&lt;&lt;
+*            t.test(mpg ~ vs, mtcars) #&lt;&lt;
 })
 ```
 
 in `ui()`:
 
-```{r eval = FALSE}
- verbatimTextOutput("text") # <<
+
+```r
+ verbatimTextOutput("text") # &lt;&lt;
 ```
 
 
 Result: 
 
 .center[
-<img src="images/example_outputPrint.PNG", width="100%">
+&lt;img src="images/example_outputPrint.PNG", width="100%"&gt;
 ]
 
 ]
@@ -641,7 +668,7 @@ Result:
 
 
 
-<!-- *********** New Slide ************** -->
+&lt;!-- *********** New Slide ************** --&gt;
 ---
 class:small
 ## Text
@@ -652,8 +679,9 @@ Example from the [manual](https://mastering-shiny.org/basic-ui.html#outputs) :
 
 In `server()`
 
-```{r eval = FALSE}
-print_and_return <- function() {
+
+```r
+print_and_return &lt;- function() {
     print("a")
     print("b")
     return("c")
@@ -661,16 +689,16 @@ print_and_return <- function() {
 
 
 
-# <--- here goes the rest ---> # 
-output$text <- renderText({
+# &lt;--- here goes the rest ---&gt; # 
+output$text &lt;- renderText({
    
-    x <- print_and_return()
+    x &lt;- print_and_return()
     x    
 })
 
-output$print <- renderPrint({
+output$print &lt;- renderPrint({
     
-    x <- print_and_return()
+    x &lt;- print_and_return()
     x    
 })
 ```
@@ -679,7 +707,7 @@ output$print <- renderPrint({
 
 **Result:**
 
-<img src="images/example_outputTextvsPrint.PNG", width="50%">
+&lt;img src="images/example_outputTextvsPrint.PNG", width="50%"&gt;
 
  Remember: A function can print multiple things, but can only return a single value
  
@@ -687,8 +715,9 @@ output$print <- renderPrint({
  
 Example: 
  
-```{r eval=FALSE}
-a <- rbeta(1,-1,1) # Warning is printed
+
+```r
+a &lt;- rbeta(1,-1,1) # Warning is printed
 a # No warning
 ```
  
@@ -703,7 +732,7 @@ a # No warning
 
 
 
-<!-- *********** Exercise ************** -->
+&lt;!-- *********** Exercise ************** --&gt;
 ---
 ## Your turn ! 
 
@@ -711,12 +740,12 @@ Open the file `output_exercise_app.R`. When you run the app, you see that I alre
 
 
 
-<!-- *********** HEADING ************** -->
+&lt;!-- *********** HEADING ************** --&gt;
 ---
 class: heading,middle
 Layout
 
-<!-- *********** NEW SLIDE ************** -->
+&lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
 ## Layout
 
@@ -729,7 +758,7 @@ We will talk about three ways to organize your app:
 
 For more information you can go [here](https://shiny.rstudio.com/articles/layout-guide.html)
 
-<!-- *********** NEW SLIDE ************** -->
+&lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
 ## Sidebar Layout
 
@@ -744,11 +773,11 @@ The result is a two-column layout with inputs on the left (or right with `positi
 
 
 .center[
-<img src="images/sidebar.PNG", width="40%">
+&lt;img src="images/sidebar.PNG", width="40%"&gt;
 ]
 
 
-<!-- *********** Exercise ************** -->
+&lt;!-- *********** Exercise ************** --&gt;
 ---
 ## Grid Layout
 
@@ -761,14 +790,14 @@ custom application layouts using the Shiny grid layout system. The main function
 - (`wellPanel()`: Creates a panel with a slightly inset border and grey background.)
 
 .center[
-<img src="images/multirow.PNG", width="40%">
+&lt;img src="images/multirow.PNG", width="40%"&gt;
 ]
 
 Figure 3.2 from [https://mastering-shiny.org/](https://mastering-shiny.org/basic-ui.html#layout)
 
 
 
-<!-- *********** Exercise ************** -->
+&lt;!-- *********** Exercise ************** --&gt;
 ---
 ## Grid Layout
 
@@ -776,7 +805,7 @@ Note: The column widths are based on the Bootstrap 12-wide grid system, so shoul
 
 Lets look at the examples in `example_layouts_sidebar_with_grid.R` and `example_layouts_with_grid.R`
 
-<!-- *********** NEW SLIDE ************** -->
+&lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
 class:small
 ## Tabsets
@@ -787,14 +816,15 @@ class:small
   - `tabsetPanel()`: Start of the tabset panels
   - `tabPanel("ID",):` Single tabset panel
 
-<!-- *********** NEW SLIDE ************** -->
+&lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
 class:small
 ## Tabsets - Example in example_tabset.R
 
 .pull-left[
-```{r eval = FALSE}
-ui <- fluidPage(
+
+```r
+ui &lt;- fluidPage(
 
   fluidRow(
     
@@ -827,11 +857,11 @@ ui <- fluidPage(
 ```
 ]
 .pull-right[
-<img src="images/example_tabset.PNG", width="100%">
+&lt;img src="images/example_tabset.PNG", width="100%"&gt;
 ]
 
 
-<!-- *********** NEW SLIDE ************** -->
+&lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
 class:small
 ## Conditional Panels 
@@ -842,7 +872,8 @@ class:small
 - Example in Example in `example_tabset_cond.R`
 
 .pull-left[
-```{r eval=FALSE}
+
+```r
 column(4,
 conditionalPanel("input.tabs1 == 'Normal'",
   sliderInput("mu", "M:",  value = 5), 
@@ -863,29 +894,30 @@ column(8,
 .pull-right[
 
 .center[
-<img src="images/example_tabset_cond1.PNG", width="50%">
+&lt;img src="images/example_tabset_cond1.PNG", width="50%"&gt;
 ***
-<img src="images/example_tabset_cond2.PNG", width="50%">
+&lt;img src="images/example_tabset_cond2.PNG", width="50%"&gt;
 ]
 
 ]
 
 
-<!-- *********** NEW SLIDE ************** -->
+&lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
 ## Themes
 
 You can also set a different theme in your UI by using the theme argument inside `fluidPage()`
 
 
-```{r eval=FALSE}
+
+```r
 theme = shinythemes::shinytheme("darkly")
 ```
 
 
 Try out different themes [here](https://shiny.rstudio.com/gallery/shiny-theme-selector.html)
 
-<!-- *********** NEW SLIDE ************** -->
+&lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
 ## HTML + Markdown
 
@@ -903,7 +935,8 @@ See `? builder()` for more information.
 
 .pull-left[
 
-```{r eval = FALSE}
+
+```r
 sidebarPanel(
            
  h1("Here comes some text"),
@@ -923,7 +956,7 @@ sidebarPanel(
 .pull-right[
 
 .center[
-<img src="images/example_html.PNG", width="50%">
+&lt;img src="images/example_html.PNG", width="50%"&gt;
 ]
 
 ]
@@ -934,20 +967,20 @@ sidebarPanel(
 
 
 
-<!-- *********** Exercise ************** -->
+&lt;!-- *********** Exercise ************** --&gt;
 ---
 ## Your turn ! 
 
 Take one of the apps you created in one of the previous exercises (or use the default app) and change its layout using, either the grid Layout **or** tabsets.
 
-<!-- *********** HEADING ************** -->
+&lt;!-- *********** HEADING ************** --&gt;
 ---
 class: heading,middle
-Server & Reactivity
+Server &amp; Reactivity
 
-<!-- *********** NEW SLIDE ************** -->
+&lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
-## Server & Reactivity
+## Server &amp; Reactivity
 
 - Reactive values (i.e., `input$`) have to be in a **reactive expression** (e.g. `renderPlot()`, `reactive()`)
 
@@ -961,14 +994,14 @@ Server & Reactivity
 Lets look at some examples based on https://mastering-shiny.org/basic-reactivity.html (see also [here](https://shiny.rstudio.com/articles/reactivity-overview.html))
 
 
-<!-- *********** NEW SLIDE ************** -->
+&lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
-## Server & Reactivity
+## Server &amp; Reactivity
 
 Lets look at `example_reactivity_1.R`. The reactivity graph looks like this:
 
 .center[
-<img src="images/reactivity1.PNG", width="35%">
+&lt;img src="images/reactivity1.PNG", width="35%"&gt;
 ]
 
 
@@ -976,15 +1009,15 @@ The output of `hist` changes if any of the inputs (`mu1,sd1,n1,mu2,sd2,n2,bins`)
 
 What are the problems with this ? 
 
-<!-- *********** NEW SLIDE ************** -->
+&lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
-## Server & Reactivity
+## Server &amp; Reactivity
 .pull-left[
 
 Lets look at `example_reactivity_2.R`. The reactivity graph looks like this:
 
 .center[
-<img src="images/reactivity2.PNG", width="90%">
+&lt;img src="images/reactivity2.PNG", width="90%"&gt;
 ]
 ]
 
@@ -992,37 +1025,40 @@ Lets look at `example_reactivity_2.R`. The reactivity graph looks like this:
 
 I pulled out the repeated `rnorm` computation into two new reactive expressions inside `reactive()` and  assigned the results to two new objects `x1` and `x2`. 
 
-```{r eval = FALSE}
-x1 <- reactive( 
+
+```r
+x1 &lt;- reactive( 
   rnorm(input$n1, input$mu1, input$sd1)
 ) 
 ```
 
-This created three independent modules, which can be recomputed independtly -> increase efficiency. Note: To later use the results from `reactive()`, you have to call the variable like it’s a function, e.g. `x1()`.
+This created three independent modules, which can be recomputed independtly -&gt; increase efficiency. Note: To later use the results from `reactive()`, you have to call the variable like it’s a function, e.g. `x1()`.
 
-```{r eval = FALSE }
+
+```r
 t.test(x1(),x2()) 
 ```
 
 
 ]
 
-<!-- *********** NEW SLIDE ************** -->
+&lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
-## Server & Reactivity
+## Server &amp; Reactivity
 
 .pull-left[
 Lets look at the last examples `example_reactivity_3.R`. The reactivity graph looks like this:
 
 .center[
-<img src="images/reactivity3.PNG", width="90%">
+&lt;img src="images/reactivity3.PNG", width="90%"&gt;
 ]
 ]
 
 .pull-right[
  Here I added an `actionButton`  as input in the UI
 
-```{r eval = FALSE }
+
+```r
 actionButton(inputId = "sim",
              label   = "Start Simulation",
              icon    = icon("laptop-code"))
@@ -1030,46 +1066,169 @@ actionButton(inputId = "sim",
 
 I then made the computation of `x1` and `x2`dependnt on this action button
 
-```{r eval = FALSE}
- x1 <- eventReactive(input$sim, {
-    rnorm(input$n1, input$mu1, input$sd1) 
-})
+
+```r
+ x1 &lt;- eventReactive(input$sim, {
+          rnorm(input$n1, input$mu1, input$sd1) 
+       })
 ```
 
 Why not just like this ? 
 
-```{r eval = FALSE}
-x1 <- reactive( 
+
+```r
+x1 &lt;- reactive( 
   input$sim,
   rnorm(input$n1, input$mu1, input$sd1)
 ) 
 ```
 
 ]
-<!-- *********** Exercise ************** -->
+&lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
-## Your turn ! 
-
-
+## Server
  task k-means clustering https://bookdown.org/yihui/rmarkdown/shiny-widgets.html#example-k-means-clustering
  
-
-<!-- *********** HEADING ************** -->
----
-class: heading,middle
-
-Publishing your Shiny App
+# Output
+ loading data.frames
+ using data again. 
+ reset inputs
 
 
-<!-- *********** NEW SLIDE ************** -->
+
+&lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
 ## Deploying your app
 Create a subdirectory named www in your Shiny app directory. This subdirectory name www is special. Shiny makes every file in www available to your user’s browser. The www subdirectory is a great place to put CSS files, images, and other things a browser needs to build your Shiny App.
-<!-- *********** NEW SLIDE ************** -->
+&lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
 ## Helpful references
 - https://mastering-shiny.org
 - https://bookdown.org/yihui/rmarkdown/shiny-documents.html
-- Check out the many examples here: https://shiny.rstudio.com/gallery/ (scroll down)
+- https://shiny.rstudio.com/
 - https://github.com/daattali/advanced-shiny
 - https://shiny.rstudio.com/articles/layout-guide.html
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"ratio": "16:9",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
