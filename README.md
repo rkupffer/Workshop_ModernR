@@ -2,7 +2,7 @@
 
 This repository contains the materials for the workshop **Modern R** at the SMiP graduate school in Mannheim, Germany. 
 
-The workshop consits of three parts:
+The workshop consists of three parts:
 
 - Introduction to `R Markdown`
 - Writing APA conform manuscripts with the `papaja` package
