@@ -9,3 +9,19 @@ The workshop consits of three parts:
 - Introduction to `shiny`
 
 
+Packages used:
+
+cggplot2
+dplyr
+
+```r
+wanted.packages <- packages
+  
+  
+  new.packages <- wanted.packages[!(wanted.packages %in% installed.packages()[,"Package"])]
+  
+  # installed the not yet installed but required packages and load them
+  
+  if(length(new.packages)) install.packages(new.packages,dependencies = TRUE)
+  sapply(wanted.packages, require, character.only = TRUE)
+```
