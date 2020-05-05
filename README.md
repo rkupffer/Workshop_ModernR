@@ -5,7 +5,7 @@ This repository contains the materials for the workshop **Modern R** at the SMiP
 The workshop consists of three parts:
 
 - Introduction to `R Markdown`
-- Writing APA conform manuscripts with the `papaja` package
+- Writing APA conform manuscripts with the [`papaja`](https://github.com/crsh/papaja) package
 - Building interactive web applications in R with `Shiny`
 
 
