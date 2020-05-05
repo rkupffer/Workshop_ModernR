@@ -5,23 +5,19 @@ This repository contains the materials for the workshop **Modern R** at the SMiP
 The workshop consits of three parts:
 
 - Introduction to `R Markdown`
-- Introduction to the `papaja`-package from Frederik Aust
-- Introduction to `shiny`
+- Introduction to writing APA conform articles with the `papaja`-package
+- Introduction to `Shiny`
 
 
 Packages used:
 
-cggplot2
-dplyr
-
 ```r
-wanted.packages <- packages
+wanted.packages <- c("ggplot2","dplyr","shiny","gganimate","plotly","kableExtra","DT","broom","rsconnect")
   
+new.packages <- wanted.packages[!(wanted.packages %in% installed.packages()[,"Package"])]
   
-  new.packages <- wanted.packages[!(wanted.packages %in% installed.packages()[,"Package"])]
-  
-  # installed the not yet installed but required packages and load them
-  
-  if(length(new.packages)) install.packages(new.packages,dependencies = TRUE)
-  sapply(wanted.packages, require, character.only = TRUE)
+ # installe the not yet installed but required packages and load them
+if(length(new.packages)) install.packages(new.packages,dependencies = TRUE)
+sapply(wanted.packages, require, character.only = TRUE)
 ```
+
