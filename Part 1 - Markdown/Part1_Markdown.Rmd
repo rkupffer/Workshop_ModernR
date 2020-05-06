@@ -577,7 +577,7 @@ kable(head(iris,10))
 ---
 ## Make nicer tables  with kableExtra and DT 
 
-With  `data.table()` from the [DT package](/https://rstudio.github.io/DT/) : 
+With  `datatable()` from the [DT package](/https://rstudio.github.io/DT/) : 
 
 ```{r message=FALSE}
 library(DT)
