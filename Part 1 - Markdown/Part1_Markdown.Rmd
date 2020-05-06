@@ -736,15 +736,17 @@ You can also use shiny elements in your HTML - Markdown document or presentation
 title: "Untitled"
 author: "David Izydorczyk"
 date: "22 4 2020"
-output: 
-  html_document:
+output: html_document
 runtime: shiny #<<
 ---
 
 # start code chunk ```{r}
 
+library(dplyr)
+library(ggplot2)
+  
 inputPanel(
-  numericInput("Mean"  , label = "Mean" ,value = 0),
+  numericInput("Mean"  , label = "Mean" ,value = 0)
 )
 
 # This functionblock gets executed everytime one of the input changes
@@ -753,7 +755,7 @@ renderPlot({
 
 m   <- input$Mean
   
-rnorm(N,m,sd) %>% as.data.frame %>% 
+rnorm(100,m,5) %>% as.data.frame %>% 
  ggplot(aes(x=.)) +
   geom_histogram(aes(y=..density..)) +
   geom_density(aes(y=..density..),fill="tomato1",alpha=0.4) +
@@ -767,28 +769,28 @@ rnorm(N,m,sd) %>% as.data.frame %>%
 
 <!-- *********** NEW SLIDE ************** -->
 ---
-## Now its your turn !
+## Now it's your turn !
 
 Create an `RMarkdown` file and delete everything execpt the YAML header and the setup chunk
 
 Create the following section structure:
-  - 1. Setup
-    - 1.1 Packages 
-    - 1.2 Data
-  - 2. Summary
-  - 3. Plot
+  1. Setup
+    1.1 Packages 
+    1.2 Data
+  2. Summary
+  3. Plot
   
 Load the `ggplot2` package (`library(ggplot2)`) in a code chunk in the `1.1 Package` section you just created
 
-Load the [happiness2017](https://www.kaggle.com/unsdsn/world-happiness/version/2#2017.csv) from the data folder in a code chunk in the `Data` section (`read.csv("Data\happines2017)`)
+Load the [happiness2017](https://www.kaggle.com/unsdsn/world-happiness/version/2#2017.csv) from the data folder in a code chunk in the `Data` section (`read.csv("Part 1 - Markdown/Data/happines2017")`)
 
-Print the top of the dataframe (`data[1:5,]`)) in a code chunk in the `Summary` section, try using `datatable()` or the `kable()` (maybe you need to install the `DT` and `kableExtra`packages first).
+Print the top of the dataframe (`data[1:5,]`)) in a code chunk in the `Summary` section, try using `datatable()` or  `kable()` (maybe you need to install the `DT` and the `kableExtra`packages first).
 
 Compute some summaries or linear regression (e.g. using `summary()/lm()`) for some variables you are interested in, in a code chunk in the `Summary` section.
 
 <!-- *********** NEW SLIDE ************** -->
 ---
-## Now its your turn !
+## Now it's your turn !
 
 Write some text describing the results using some of the text formatting options and inline R-code. 
 
