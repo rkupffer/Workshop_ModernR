@@ -1091,7 +1091,7 @@ x1 &lt;- reactive(
 
 Your task is it to create an app which does an k-means clustering analysis on the [happiness2017](https://www.kaggle.com/unsdsn/world-happiness/version/2#2017.csv) data we had before. 
 
-The should have three inputs:
+The app should have three inputs:
 
 - Select variable 1
 - Select variable 2
@@ -1099,7 +1099,7 @@ The should have three inputs:
 
 And three outputs: 
 
-- Plot of the k-means results, i.e. scatterplot of the two variables, colored by cluster (+ centroid of cluster)
+- Plot of the k-means results, i.e. scatterplot of the two variables, colored by cluster (+ centroid of clusters)
 - Raw results of the k-means algorithm
 - Raw data (to better see the possible variable inputs and their values)
 
@@ -1115,7 +1115,7 @@ You can load data (e.g., `read.csv("Part 3 - Shiny/Data/happines2017")`) and cre
 `kmeans(x = data,centers = k)`  from base `R`
 
 
-If you have a data.frame with two variables (`temp`) and the results of the `kmeans()` function (`kmeans`), this might be a way to plot it:
+If you have a data.frame (`temp`) with two variables and the results of the `kmeans()` function (`kmeans`), this might be a way to plot it:
 
 
 ```r
@@ -1143,7 +1143,48 @@ Publishing your Shiny App
 &lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
 ## Deploying your app
-Create a subdirectory named www in your Shiny app directory. This subdirectory name www is special. Shiny makes every file in www available to your user’s browser. The www subdirectory is a great place to put CSS files, images, and other things a browser needs to build your Shiny App.
+
+You can deploy your shiny app either by having your own [shiny server](https://rstudio.com/products/shiny/shiny-server/?_ga=2.165307323.56038037.1588581253-1556918011.1538985794) , or by using an external server like [shinyapps.io](https://www.shinyapps.io/?_ga=2.165307323.56038037.1588581253-1556918011.1538985794)
+
+[shinyapps.io](https://www.shinyapps.io/?_ga=2.165307323.56038037.1588581253-1556918011.1538985794) is a platform as a service (PaaS) for hosting Shiny web apps (applications). They also offer a free plan.
+
+To host your shiny app there you need to:
+
+- make an account at [shinyapps.io](https://www.shinyapps.io/?_ga=2.165307323.56038037.1588581253-1556918011.1538985794)
+
+- install the  `rsconnect` R package
+
+
+&lt;!-- *********** NEW SLIDE ************** --&gt;
+---
+## Deploying your app
+
+If you have an account (you don't have to do it) and installed `rsconnect` [this](https://shiny.rstudio.com/articles/shinyapps.html) is how you host your app: 
+
+- You have to configure the `rsconnect` package to use your account:
+  - Click the show button on the token page of your shiny.io - dashboard.
+  - A window will pop up that shows the full command to configure your account.
+  - Copy  and then paste it into the Console of RStudio and click enter.
+
+- run `deployApp()`  or use the blue `Publish` button.
+
+- **Note:**
+  - If you have additional files you use in your app (images, data sets, `.R`files, `.css` files), they need to be in a subdirectory called **www** in your app directory
+  - your app must be named **app.R**
+
+Your app folder layout should be like this:
+
+
+```r
+cool_shiny_app:
+  |- app.R
+  |- www
+      | - image1.png
+      | - cool_data.csv
+```
+
+
+
 &lt;!-- *********** NEW SLIDE ************** --&gt;
 ---
 ## Helpful references
