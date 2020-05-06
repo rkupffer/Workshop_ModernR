@@ -1050,13 +1050,50 @@ x1 <- reactive(
 ---
 ## Your turn ! 
 
-- Load happiness data  
-- Three inputs
-- Let the user select 
 
--
- task k-means clustering https://bookdown.org/yihui/rmarkdown/shiny-widgets.html#example-k-means-clustering
- 
+Your task is it to create an app which does an k-means clustering analysis on the [happiness2017](https://www.kaggle.com/unsdsn/world-happiness/version/2#2017.csv) data we had before. 
+
+The app should have three inputs:
+
+- Select variable 1
+- Select variable 2
+- Number of clusters
+
+And three outputs: 
+
+- Plot of the k-means results, i.e. scatterplot of the two variables, colored by cluster (+ centroid of clusters)
+- Raw results of the k-means algorithm
+- Raw data (to better see the possible variable inputs and their values)
+
+
+The layout is totally up to you.
+
+<!-- *********** Exercise ************** -->
+---
+## Tipps
+
+You can load data (e.g., `read.csv("Part 3 - Shiny/Data/happines2017")`) and create variables  which you can access in your entire app (for instance in the choice options  in selectInput), when you insert the code before the `ui`.
+
+`kmeans(x = data,centers = k)`  from base `R`
+
+
+If you have a data.frame (`temp`) with two variables and the results of the `kmeans()` function (`kmeans`), this might be a way to plot it:
+
+```{r eval=FALSE}
+temp$cluster <-  factor(kmeans$cluster)
+    
+        
+ggplot(temp,aes_string(x = input$var1, y = input$var2, color = "cluster")) +
+    geom_point() +
+    geom_point(data=data.frame(kmeans$centers),
+               color = "black",
+               shape = 4,
+               size  = 4) +
+    theme_bw()
+
+```
+
+
 
 <!-- *********** HEADING ************** -->
 ---
