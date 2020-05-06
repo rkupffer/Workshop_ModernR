@@ -32,5 +32,5 @@ if(!"tinytex" %in% rownames(installed.packages())) install.packages("tinytex")
 tinytex::install_tinytex()
 ```
 
-**Note:** The workshop is based on R 3.6.0. I can not guarantee that all packages still work with the newest R 4.0
+**Note:** The workshop is based on R 3.6.3. I can not guarantee that all packages still work with the newest R 4.0
 
