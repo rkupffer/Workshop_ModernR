@@ -324,7 +324,7 @@ Buttons are most often used in combination with `observeEvent()` or `eventReacti
 ---
 ## Select varibales from a data.frame
 
-There are also convenient ways to let users select variables from a data.frame:
+There are also convenient ways to let users select variables from a data.frame (however `selectInput()` also works)
 
 ```{r eval=FALSE}
 varSelectInput(inputId = "selectVars",
@@ -1050,7 +1050,11 @@ x1 <- reactive(
 ---
 ## Your turn ! 
 
+- Load happiness data  
+- Three inputs
+- Let the user select 
 
+-
  task k-means clustering https://bookdown.org/yihui/rmarkdown/shiny-widgets.html#example-k-means-clustering
  
 
