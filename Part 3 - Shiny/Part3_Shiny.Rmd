@@ -101,7 +101,7 @@ A shiny app consits of two parts:
 
 - In the `ui()` part you define the **layout** of your app, as well as possible **inputs**
 
-- These inputs are saved as a **reactive value** in a named read-only `list`-object called `input`. For instance, in the default app the slider-input is called `bins`. The value of this input is then save in `input$bins`. 
+- These inputs are saved as a **reactive value** in a named read-only `list`-object called `input`. For instance, in the default app the slider-input is called `bins`. The value of this input is then saved in `input$bins`. 
 
 - This `input`-list can then be accessed in the `server` part. 
 
@@ -129,7 +129,7 @@ A shiny app consits of two parts:
 
 3.  Output is not shown -> make sure your `render()` and `Output()` functions match
 
-4. <font color ="red">Warning: Error in dots_list: object 'output' not found</font> -> Did you put `output$x` in a Output-functiont and forgot the "" ? (i.e., `textOutput(output$x)` instead of `textOutput("x")`).
+4. <font color ="red">Warning: Error in dots_list: object 'output' not found</font> -> Did you put `output$x` in a Output-function or forgot the "" ? (i.e., `textOutput(output$x)` instead of `textOutput("x")`).
 
 <!-- *********** Exercise ************** -->
 ---
@@ -615,15 +615,15 @@ Result:
 **Better**: In `server()`:
 
 ```{r eval = FALSE }
-output$text <- renderPrint({ # <<<
-             t.test(mpg ~ vs, mtcars) #<< #<<
+output$text <- renderPrint({ #<<
+             t.test(mpg ~ vs, mtcars) 
 })
 ```
 
 in `ui()`:
 
 ```{r eval = FALSE}
- verbatimTextOutput("text") # <<
+ verbatimTextOutput("text") #<<
 ```
 
 
@@ -661,7 +661,6 @@ print_and_return <- function() {
 
 
 
-# <--- here goes the rest ---> # 
 output$text <- renderText({
    
     x <- print_and_return()
@@ -707,7 +706,13 @@ a # No warning
 ---
 ## Your turn ! 
 
-Open the file `output_exercise_app.R`. When you run the app, you see that I already defined three outputs:  plot, results, and raw data. Your task is it to supply the missing `render()` (in the server part) and `Output` functions (in the UI part).  I already wrote some code snippets for you, which you can use if you want. We don't need inputs this time.
+Open the file `output_exercise_app.R`.
+
+When you run the app, you see that I already defined three outputs:  Plot, Results, and Raw Data.
+
+Your task is it to supply the missing `render()` functions in the server part and `Output` functions in the UI part.
+
+I already wrote some code snippets for you, which you can use if you want. We don't need inputs this time.
 
 
 
@@ -772,7 +777,7 @@ Figure 3.2 from [https://mastering-shiny.org/](https://mastering-shiny.org/basic
 ---
 ## Grid Layout
 
-Note: The column widths are based on the Bootstrap 12-wide grid system, so should add up to 12 within a `fluidRow()` container. 
+Note: The column widths are based on the Bootstrap 12-wide grid system, so they should add up to 12 within a `fluidRow()` container. 
 
 Lets look at the examples in `example_layouts_sidebar_with_grid.R` and `example_layouts_with_grid.R`
 
@@ -896,7 +901,7 @@ You can also integrate HTML and Markdown elements in your UI, for example:
 - `br()` line breaks
 - `img()` for images
 - `strong()` for bold text 
-- `includeMarkdown("this_is_a_markdown_file.md")` ()
+- `includeMarkdown("this_is_a_markdown_file.md")` 
 
 See `? builder()` for more information.
 
@@ -938,7 +943,7 @@ sidebarPanel(
 ---
 ## Your turn ! 
 
-Take one of the apps you created in one of the previous exercises (or use the default app) and change its layout using, either the grid Layout **or** tabsets.
+Take one of the apps you created in one of the previous exercises (or use the default app) and change its layout using, either the grid Layout or tabsets, or both.
 
 <!-- *********** HEADING ************** -->
 ---
@@ -1028,7 +1033,7 @@ actionButton(inputId = "sim",
              icon    = icon("laptop-code"))
 ```
 
-I then made the computation of `x1` and `x2`dependnt on this action button
+I then made the computation of `x1` and `x2` dependent on this action button
 
 ```{r eval = FALSE}
  x1 <- eventReactive(input$sim, {
