@@ -35,7 +35,7 @@ Part 2: Writing scientific articles with the [papaja](https://github.com/crsh/pa
 
 - So far we learned how to use `R Markdown` to create reproducible reports
 
-- `Papaja` allows us to write an entire paper in `R`, automatically create results, tables, graphs and references, and everything in APA-format. 
+- `Papaja` allows us to write an entire paper in `R`, automatically createing results, tables, graphs and references, and everything in APA-format ! 
 
 - `Papaja`  = "Prepare APA Journal Articles"
 
@@ -682,9 +682,9 @@ With pre-/postfix           | [e.g., @rubin1996, etc.] | (e.g., Rubin, 1996, etc
 ---
 ## Helpful references:
 
-- https://bookdown.org/yihui/rmarkdown
-- https://crsh.github.io/papaja_man/introduction.html#getting-started
-- https://haozhu233.github.io/kableExtra/awesome_table_in_pdf.pdf
-- https://cran.rstudio.com/web/packages/kableExtra/vignettes/awesome_table_in_html.html
-- https://rpubs.com/YaRrr/papaja_guide
+- Markdown: https://bookdown.org/yihui/rmarkdown
+- Papaja: https://crsh.github.io/papaja_man/introduction.html#getting-started
+- Tables with Kable: https://haozhu233.github.io/kableExtra/awesome_table_in_pdf.pdf
+- Tables with Kable: https://cran.rstudio.com/web/packages/kableExtra/vignettes/awesome_table_in_html.html
+- Papaja Tutorial: https://rpubs.com/YaRrr/papaja_guide
 
