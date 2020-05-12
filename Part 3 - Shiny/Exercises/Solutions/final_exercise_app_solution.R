@@ -2,7 +2,7 @@ library(shiny)
 library(DT)
 
 
-happy <- read.csv("../Data/happiness2017.csv")
+happy <- read.csv("../../Data/happiness2017.csv")
 vars  <- names(happy)
 
 # Define UI for application that draws a histogram

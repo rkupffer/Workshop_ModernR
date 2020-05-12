@@ -50,7 +50,7 @@ ui <- fluidPage(
         mainPanel(
         
         # <--- here comes your output ---> # 
-        plotlyOutput("coolPlot")
+        plotOutput("coolPlot")
             
             
             
@@ -111,7 +111,7 @@ server <- function(input, output) {
     p <- ggplot(phd_top_n, aes(x = factor(year), y = log(n_phds), color = group, group = group)) +
             geom_line() +
             geom_point() +
-            scale_fill_brewer(palette=input$palette) +
+            scale_color_brewer(palette=input$palette) +
             labs(fill = groupBY,
                  x     = "Year",
                  y     = "Nr. of PhDs",
