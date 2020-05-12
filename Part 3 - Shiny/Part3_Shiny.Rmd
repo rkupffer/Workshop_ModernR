@@ -516,7 +516,7 @@ dataTableOutput("table")
 Result: 
 
 .center[
-<img src="images/example_outputDTtable.PNG", width="100%">
+<img src="images/example_outputDTTable.PNG", width="100%">
 ]
 
 ]
