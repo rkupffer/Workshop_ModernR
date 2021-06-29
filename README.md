@@ -12,7 +12,8 @@ The workshop consists of three parts:
 The following code can be used to install the packages used in this workshop:
 
 ```r
-wanted.packages <- c("tidyverse","ggplot2","devtools","shiny","gganimate","plotly","kableExtra","DT","broom","rsconnect")
+wanted.packages <- c("tidyverse","ggplot2","devtools","shiny","gganimate","plotly","kableExtra",
+"DT","broom","rsconnect")
   
 # Check what packages need to be installed
 new.packages <- wanted.packages[!(wanted.packages %in% installed.packages()[,"Package"])]
@@ -36,7 +37,7 @@ tinytex::install_tinytex()
 
 
 
-**Note:** The workshop is based on R 4.1.0.
+**Note:** The workshop is based on R Version 4.1.0 and RStudio Version 1.4.1717
 
 
 Package versions I used:
