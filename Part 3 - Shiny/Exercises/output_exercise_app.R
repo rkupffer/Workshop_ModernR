@@ -11,14 +11,14 @@ ui <- fluidPage(
 
     # Sidebar
     sidebarLayout(
-        sidebarPanel(
-            
+      sidebarPanel(
+        
         # <--- No input this time---> # 
-            
-            
-            
-            
-        ),
+        
+        
+        
+        
+      ),
 
         # Show a plot of the generated distribution
         mainPanel(

@@ -26,6 +26,11 @@ ui <- fluidPage(
           
           plotOutput("beta")
           
+        ),
+        tabPanel("Text",
+        
+          includeMarkdown("test.md")
+                          
         )
       ) # end tabsetPanel
     ) # end column

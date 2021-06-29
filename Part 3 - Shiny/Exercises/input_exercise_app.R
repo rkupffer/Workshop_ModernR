@@ -38,6 +38,12 @@ ui <- fluidPage(
 
 server <- function(input, output) {
     
+ 
+  
+  
+  
+  
+  
 
     # <--- here goes the rest ---> # 
     output$coolPlot <- renderPlotly({  # note that we are using the plotly render/Output functions from the plotly package
@@ -85,7 +91,7 @@ server <- function(input, output) {
           scale_color_brewer(palette=input$palette) +
           labs(fill = groupBY,
                x     = "Year",
-               y     = "Nr. of PhDs",
+               y     = "log(Nr. of PhDs)",
                title = input$title) +
           theme_bw()
         

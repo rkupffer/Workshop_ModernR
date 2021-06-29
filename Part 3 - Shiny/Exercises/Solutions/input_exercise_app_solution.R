@@ -39,7 +39,8 @@ ui <- fluidPage(
                          choices = c("Set1","PiYG","Greys")),
             
             textInput(inputId = "title",
-                      label   =  "Label your plot")
+                      label   =  "Label your plot",
+                      value   = "Default Title")
             
             
             
@@ -50,7 +51,7 @@ ui <- fluidPage(
         mainPanel(
         
         # <--- here comes your output ---> # 
-        plotOutput("coolPlot")
+        plotlyOutput("coolPlot")
             
             
             
@@ -69,26 +70,29 @@ server <- function(input, output) {
     # Get data.frame
     phd   <- read.csv(input$dataset$datapath)  # get uploaded data.frame
     
+    
+    # for testing:
+    # phd <- read.csv("Part 3 - Shiny/Data/phd_by_field.csv")
+    # range_min <- 2013
+    # range_max <- 2017
+    # groupBY <- "broad_field"
+    
+    
     # Get range of years
     range_min <- min(input$year)
     range_max <- max(input$year)
     
     # Get grouping variable
     groupBY <- input$groupBY
-    # groupBY <- "broad_field"
     
     
-    
-    
-    
-
     # Filter and tidy df
     phdgrouped <- phd %>% 
-                    mutate(group = .data[[groupBY]],
-                           group_s = group%>% as.character()) %>% 
+                    mutate(group   = .data[[groupBY]],
+                           group_s = group %>% as.character()) %>% 
                     filter(year >= range_min & year <= range_max) %>% 
                     group_by(group,group_s,year) %>% 
-                    summarize(n_phds = sum(n_phds,na.rm=TRUE))  %>% 
+                    summarize(n_phds = sum(n_phds,na.rm=TRUE),.groups="drop")  %>% 
                     group_by(group,group_s) %>% 
                     mutate(top_n = sum(n_phds)) %>% 
                     ungroup()
@@ -103,8 +107,7 @@ server <- function(input, output) {
                     
     
     # Select top n fields only 
-    phd_top_n <- phdgrouped %>%
-                    filter(group_s %in% filter_n)
+    phd_top_n <- phdgrouped %>% filter(group_s %in% filter_n)
         
   
     # Make the plot
@@ -114,7 +117,7 @@ server <- function(input, output) {
             scale_color_brewer(palette=input$palette) +
             labs(fill = groupBY,
                  x     = "Year",
-                 y     = "Nr. of PhDs",
+                 y     = "log(Nr. of PhDs)",
                  title = input$title) +
             theme_bw()
         

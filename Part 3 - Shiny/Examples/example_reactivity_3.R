@@ -37,6 +37,10 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output) {
     
+    
+    
+    
+    
     x1 <- eventReactive(input$sim, {
                         rnorm(input$n1, input$mu1, input$sd1) 
           }) 

@@ -15,15 +15,23 @@ ui <- fluidPage(
     ),
   ), # end fluidRow
   
+  
+  
+  
+  
   hr(), # horizontal line
+  
+  
+  
+  
   fluidRow(
-    column(3,offset=1,
+    column(4,
       sliderInput("sd", "SD:", min = 0, max = 100, value = 4)
     ),
-    column(3,offset=1,
+    column(4,
       sliderInput("m", "Mean:", min = -100, max = 100, value = 0)
     ),
-    column(3,offset=1,
+    column(4,
       sliderInput("n", "n:", min = 0, max = 1000, value = 500)
     )
   )# end fluidRow

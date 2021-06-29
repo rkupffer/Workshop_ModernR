@@ -50,7 +50,7 @@ Shiny applications can be useful, for example,
 - exploration
 - communicating your results
 - in teaching 
-- making your methods accesible to other reasearchers
+- making your methods accesible to other reasearchers (e.g.: [Curtailed RRT Made Easy](https://fabiolareiber.shinyapps.io/CurtailedRRT/))
 
 
 - Examples:
@@ -247,7 +247,7 @@ selectInput(inputId = "select",
 
 
 selectInput(inputId  = "select",
-            label    = "Are you a cat or a dog person?",
+            label    = "Are you a cat, dog or a fish person?",
             choices  = c("cat","dog","fish"),
             multiple = TRUE),
 
@@ -256,8 +256,6 @@ selectInput(inputId  = "select",
 radioButtons(inputId ="radio",
              label   = "Are you a cat or a dog person?",
              choices = c("cat","dog")),
-
-
 
 
 
@@ -708,11 +706,13 @@ a # No warning
 
 Open the file `output_exercise_app.R`.
 
-When you run the app, you see that I already defined three outputs:  Plot, Results, and Raw Data.
+When you run the app, you see that I already defined three outputs:  `Plot`, `Results`, and `Raw Data`.
 
-Your task is it to supply the missing `render()` functions in the server part and `Output` functions in the UI part.
+It is your task, to supply the missing `render()` functions in the server part and `Output` functions in the UI part.
 
-I already wrote some code snippets for you, which you can use if you want. We don't need inputs this time.
+I already wrote some code snippets for you, which you can use if you want.
+
+We don't need inputs this time, as we use the R-internal `sleep` dataset.
 
 
 

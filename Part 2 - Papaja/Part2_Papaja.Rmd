@@ -2,7 +2,7 @@
 title: "Modern R"
 subtitle: "From RMarkdown to Shiny"
 author: "David Izydorczyk"
-date: "12.05.2020"
+date: "06.07.2021"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -17,7 +17,6 @@ output:
 ```{r setup, include=FALSE, message = FALSE, warning=FALSE}
 options(htmltools.dir.version = FALSE)
 library(tidyverse)
-library(gganimate)
 library(papaja)
 ```
 
@@ -61,7 +60,7 @@ The papaja package was developed by [Frederik Aust](http://methexp.uni-koeln.de/
 
 From the [github documentation](https://crsh.github.io/papaja_man/introduction.html):
 
-"papaja is a R-package in the making including a R Markdown template that can be used with (or without) RStudio to produce documents, which conform to the American Psychological Association (APA) manuscript guidelines (6th Edition). The package uses the LaTeX document class apa6 and a .docx-reference file, so you can create PDF documents, or Word documents if you have to. Moreover, papaja supplies R-functions that facilitate reporting results of your analyses in accordance with APA guidelines." 
+"papaja is short for ‘preparing APA journal articles’ and is the name of this R package designed to create fully reproducible journal articles that seamlessly fuse statistical analyses, simulations, and prose. A manuscript written with papaja can be thought of as an extensively commented analysis script ready for publication in a scientific journal." 
 
 <!-- *********** NEW SLIDE ************** -->
 ---
@@ -169,6 +168,10 @@ printnum(0.73,gt1 = FALSE)
 printp(0.8)
 printp(0.034)
 printp(0.0001)
+
+# Specific formats
+printnum(80303383839,format="e")
+printnum(80303383839,format="E")
 ```
 ]
 .pull-right[
@@ -184,6 +187,10 @@ printnum(0.73,gt1 = FALSE)
 printp(0.8)
 printp(0.034)
 printp(0.0001)
+
+
+printnum(80303383839,format="e")
+printnum(80303383839,format="E")
 ```
 ]
 
@@ -202,7 +209,16 @@ The mean of speed is `r  printnum(mean(cars$speed))`
 &nbsp; becomes: The mean speed is `r  printnum(mean(cars$speed))`
 
 
-So even if my data changes (i.e., exclude some participants, transform the variable etc. ), you don't have to care about the reported numbers. 
+or 
+
+```{r eval = FALSE}
+The Bayes Factor is BF = `r  printnum(printnum(803033838,format="e"))` 
+```
+
+&nbsp; becomes: The Bayes Factor is BF = `r  printnum(printnum(803033838,format="e"))`
+
+
+So even if my data changes (i.e., change the model, fix an error, exclude some participants, transform the variable etc. ), you don't have to care about the reported numbers. 
 
 
 <!-- *********** NEW SLIDE ************** -->
@@ -217,6 +233,7 @@ So even if my data changes (i.e., exclude some participants, transform the varia
 
 <!-- *********** NEW SLIDE ************** -->
 ---
+class: small
 ## Reporting Statistical Analyses
 
 - `apa_print()`  returns a `list`-object with different reporting option, such as:
@@ -369,7 +386,8 @@ temp1 %>%
   kable(.,format    = "latex",booktabs=TRUE,
           align     = "c", #<<
           col.names = c("Gears","$M$","$SD$", #<<
-                        "$r$","p")) #<<
+                        "$r$","p"),#<<
+          escape    =  FALSE) #<<
 ```
 
 ]
@@ -397,7 +415,8 @@ temp1 %>%
           align     = "c",
           col.names = c("Gears","$M$","$SD$",
                         "$r$","p"),
-          caption   = "This is a caption") %>% #<<
+          caption   = "This is a caption",
+          escape    =  FALSE) %>% #<<
   footnote(general  = "This is a note", #<<
            footnote_as_chunk = TRUE, #<<
            threeparttable    = T, #<<
@@ -432,7 +451,8 @@ temp1 %>%
           align     = "c",
           col.names = c("Gears","$M$","$SD$",
                         "$r$","p"),
-          caption   = "This is a caption") %>% 
+          caption   = "This is a caption",
+          escape    =  FALSE) %>% 
   footnote(general  = "This is a note", 
            footnote_as_chunk = TRUE,
            threeparttable    = T,
@@ -450,22 +470,62 @@ temp1 %>%
 
 ]
 
+<!-- *********** NEW SLIDE ************** -->
+---
+class: small
+## Tables
+
+Works even for complexe tables:
+
+.pull-left[
+
+```{r eval = FALSE}
+library(kableExtra)
+
+df <- data.frame(cond = rep(c("exp","cont"),each=10),
+                 grp  = rep(c("old","young"),times=10),
+                 rt   = rnorm(20,500,70)) %>% 
+      group_by(cond,grp) %>% 
+      summarize(M  = mean(rt),
+                sd = sd(rt),
+                n  = length(rt))
+
+df  %>% 
+  kable(.,format    = "latex",booktabs=TRUE,
+          align     = "c",
+          col.names = c("Condition","Group","$M$","$SD$","$n$"),
+          caption   = "This is a caption",
+          escape    =  FALSE,
+          digits    = 2) %>% #<<
+  collapse_rows(columns = 1:2,
+                latex_hline = "major",
+                valign = "middle") #<<
+```
+
+]
+.pull-right[
+
+<img src="images/table5.PNG", width="100%">
+
+]
+
+
 
 <!-- *********** NEW SLIDE ************** -->
 ---
 class: small
 ## Tables
 
-Use additional `LaTeX` options
+However, some things can be very hard, for instance aligning numbers with with leading 0 at the decimal point, as the `p` column in our initial example. The "solution" in the [manual](http://haozhu233.github.io/kableExtra/awesome_table_in_pdf.pdf) depends on including an additional LaTeX package in the YAML header. However, this package adds-leading-0 since the newest release and the option to turn this off, doesn't work any more .... ... .. . .. . 
 
 .pull-left[
 
 Add in YAML 
 
 ```{r eval = FALSE}
-header-includes   : #<<
-   - \usepackage{siunitx} #<<
-   - \sisetup{add-integer-zero=false} #<<
+header-includes :#<<
+   - \usepackage{siunitx}#<<
+   - \newcolumntype{d}{S[table-format=< .3,table-comparator = true]}#<<
 ```
 
 
@@ -474,7 +534,7 @@ library(kableExtra)
 
 temp1 %>%
   kable(.,format    = "latex",booktabs=TRUE,
-          align     = "ccccS[table-format=< .3]", #<<
+          align     = "ccccd", #<<
           col.names = c("Gears","$M$","$SD$",
                         "$r$","p"),
           caption   = "This is a caption") %>% 
@@ -490,11 +550,46 @@ temp1 %>%
 ]
 .pull-right[
 
-<img src="images/table4.PNG", width="100%">
+<img src="images/table40.PNG", width="100%">
 
 ]
 
 
+<!-- *********** NEW SLIDE ************** -->
+---
+class: small
+## Tables
+
+Ugly possible workaround:
+
+.pull-left[
+
+```{r eval = FALSE}
+temp1 %>%
+  mutate(p = ifelse(grepl("< ",p),
+                    p, paste0("\\quad ",p))) %>%  #<<
+  kable(.,format    = "latex",booktabs=TRUE,
+          align     = "ccccc", 
+          col.names = c("Gears","$M$","$SD$",
+                        "$r$","p"),
+          caption   = "This is a caption",
+          escape    =  FALSE) %>% 
+  footnote(general  = "This is a note", 
+           footnote_as_chunk = TRUE,
+           threeparttable    = T,
+           escape            = F, 
+           general_title     = "Note.", 
+           title_format      = c("italic")) %>%
+  add_header_above(c(" " = 1,"Estimates" = 3))
+
+```
+
+]
+.pull-right[
+
+<img src="images/table4.PNG", width="100%">
+
+]
 
 
 
@@ -619,9 +714,52 @@ class: heading,middle
 
 References
 
+
 <!-- *********** NEW SLIDE ************** -->
 ---
-## References
+class: small
+## Cross-Referencing Figures, Tables and Equations
+
+To reference figures and tables, you can use Markdown (or LaTeX). You just have to provide a name for the code chunk which creates the table/figure. For instance if your code chunk starts with `{r resTable1}` (avoid using _), you can reference the table with `\@ref(tab:resTable1)` (or `\@ref(fig:XY)`, or `\@ref(eg:XY)`).
+
+Example:
+
+.pull-left[
+
+
+
+
+```{r eval = FALSE}
+
+# See Figure \@ref(fig:figureExp1).
+# 
+# ##```{r figureExp1}
+# plot(rnorm(50),rnorm(50))
+# ##``
+# 
+# 
+# Also see Equation \@ref(eq:mean).
+# 
+# \begin{equation}
+# \bar{X} = \frac{\sum_{i=1}^n X_i}{n} (\#eq:mean)
+# \end{equation}
+
+```
+]
+
+.pull-right[
+<img src="images/ex_cross.PNG", width="100%">
+]
+
+
+
+
+
+
+
+<!-- *********** NEW SLIDE ************** -->
+---
+## Literature References
 
 - In order to cite articles, you need to have a bibliography in a `.bib` file
 - Your `.bib` file must contain all of your references in `BibTeX` format.
@@ -675,7 +813,29 @@ With pre-/postfix           | [e.g., @rubin1996, etc.] | (e.g., Rubin, 1996, etc
 
 
 
+<!-- *********** NEW SLIDE ************** -->
+---
+## Quick Note: APA7
 
+This is still work in progress, see the open issue [here](https://github.com/crsh/papaja/issues/342), for some tipps. For instance:
+
+```{r eval=FALSE}
+csl               : "apa.csl"
+documentclass     : "apa7"
+output            : papaja::apa6_pdf
+```
+
+already goes a long way.
+
+
+
+<!-- *********** NEW SLIDE ************** -->
+---
+## Quick Note: Collaborative Working
+
+- Greatest disadvantage so far
+- Some possible solutions could be using [Github](https://github.com/) or [trackdown](https://ekothe.github.io/trackdown/)
+- However, these require some technical skills from your supervisor/PI/colleague
 
 
 <!-- *********** NEW SLIDE ************** -->

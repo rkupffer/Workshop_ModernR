@@ -1,0 +1,64 @@
+---
+title: "Example Solution"
+author: "David Izydorczyk"
+date: "29 6 2021"
+output:            
+    html_document: 
+      theme: journal
+      highlight: breezedark
+      code_folding: show
+      df_print: paged
+---
+
+
+# Setup
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Load Packages
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(kableExtra)
+library(broom)
+```
+
+## Load Data
+
+```{r}
+data <- read.csv("../Data/weight_lifting.csv")
+```
+
+
+# Summary
+
+
+```{r}
+data[1:5,]
+```
+
+```{r}
+mod <- lm(best3squat_kg~bodyweight_kg*sex,data)
+kable(tidy(mod),format="markdown",digits=3)
+```
+
+
+It seems that men lift on *average* `r mod$coefficients[3] %>% round(2)` kg more then woman.
+
+# Plot 
+
+
+```{r}
+data %>%
+  select(year,sex,best3bench_kg) %>% 
+  group_by(year,sex) %>% 
+  summarize(avg_bench = mean(best3bench_kg,na.rm=TRUE)) %>% 
+  ggplot(aes(x = year, y = avg_bench,fill = sex)) +
+    geom_point(shape=21,size=2) +
+    theme_bw() +
+    labs(x = "Year",
+         y = "Avg. Benchpress in KG")
+```
+

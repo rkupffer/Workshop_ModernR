@@ -33,8 +33,8 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output) {
     
-    x1 <- reactive( rnorm(input$n1, input$mu1, input$sd1) ) 
-    x2 <- reactive( rnorm(input$n2, input$mu2, input$sd2) )
+    x1 <- reactive( rnorm(input$n1, input$mu1, input$sd1)) 
+    x2 <- reactive( rnorm(input$n2, input$mu2, input$sd2))
     
 
     output$hist <- renderPlotly({
